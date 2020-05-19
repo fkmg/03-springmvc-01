@@ -24,4 +24,9 @@ public class SpouseController {
         return "spouse/spouselist";
     }
 
+    @RequestMapping("add")
+    public String toAddSpouseView(Model model){
+        return "spouse/spouseadd";
+    }
+
 }

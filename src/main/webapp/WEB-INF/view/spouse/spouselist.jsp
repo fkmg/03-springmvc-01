@@ -10,7 +10,7 @@
     <base href="<%=basePath%>">
 </head>
 <body>
-    <h2><a href="spouse/add">新增</a></h2>
+    <h4 align="center"><a href="spouse/add">新增</a></h4>
     <table align="center" width="600" border="1" >
         <thead>
         <tr>
