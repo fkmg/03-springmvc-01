@@ -34,14 +34,16 @@
                     formData.append("userimage", $('#userimage').get(0).files[0]);
                     formData.append("userdesc",userdesc);
                     $.ajax({
-                        url: 'uplodimage',
+                        url: 'spouse/uplodimage',
                         processData: false,  // 这个必须为false，不转换的信息
                         contentType: false, // 这个必须为false，不指定发送信息的编码类型
                         data: formData,
                         type: "POST",
                         success: function (data) {
                             // 你自己的回调方法
-                            alert(data);
+                            if(data == 200){
+                                alert('上传成功');
+                            }
                         }
                     });
                 }
@@ -114,7 +116,7 @@
     </table>
 </form>
 
-<table align="center" width="100%" border="1">
+<table align="center" width="100%" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">
     <thead>
     <tr>
         <th>编号</th>
