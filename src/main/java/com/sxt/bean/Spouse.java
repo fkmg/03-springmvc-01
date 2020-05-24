@@ -19,6 +19,28 @@ public class Spouse {
     /**评分**/
     private Double score;
 
+    /**照片**/
+    private String imgs;
+
+    /**图片描述**/
+    private String userdesc;
+
+    public String getUserdesc() {
+        return userdesc;
+    }
+
+    public void setUserdesc(String userdesc) {
+        this.userdesc = userdesc;
+    }
+
+    public String getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(String imgs) {
+        this.imgs = imgs;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -59,6 +81,7 @@ public class Spouse {
         this.score = score;
     }
 
+
     @Override
     public String toString() {
         return "Spouse{" +
@@ -67,6 +90,7 @@ public class Spouse {
                 ", sex=" + sex +
                 ", birth=" + birth +
                 ", score=" + score +
+                ", imgs='" + imgs + '\'' +
                 '}';
     }
 }

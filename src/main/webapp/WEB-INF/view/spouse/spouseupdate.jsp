@@ -7,13 +7,13 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-    <title>spouse add</title>
+    <title>spouse update</title>
     <base href="<%=basePath%>">
     <script language="javascript" src="${ctx}/js/jquery-3.3.1.min.js"></script>
     <script type="application/javascript">
         //获取表格
         $(function($) {
-           console.log('hello world');
+            console.log('hello world');
             $('#imgupload').click(function () {
                 //获取文件的名字
                 var val = $('#userimage').val();
@@ -86,7 +86,7 @@
 
 </head>
 <body>
-<form action="spouse/addspousedo" method="post" enctype="multipart/form-data">
+<form action="spouse/updatespousedo" method="post" enctype="multipart/form-data">
     <div style="float: right">
         <input type="submit" value="提交">
     </div>
@@ -96,8 +96,9 @@
                 姓名:
             </td>
             <td>
-                <input type="text" name="name">
-                <input type="hidden" id="imgs" name="imgs">
+                <input type="text" name="name" value="${spouse.name}">
+                <input type="hidden" id="imgs" name="imgs" value="${spouseImage.id}">
+                <input type="hidden" name="id" value="${spouse.id}">
             </td>
         </tr>
 
@@ -106,9 +107,13 @@
                 性别:
             </td>
             <td>
-                <input type="radio" name="sex" value="1" checked>Male
+                <input type="radio" name="sex" value="1"
+                <c:if test="${spouse.sex == 0}">checked</c:if>
+                >Male
                 <br>
-                <input type="radio" name="sex" value="0">Female
+                <input type="radio" name="sex" value="0"
+                <c:if test="${spouse.sex == 1}">checked</c:if>
+                >Female
             </td>
         </tr>
 
@@ -118,7 +123,7 @@
                 生日:
             </td>
             <td>
-                <input type="datetime" name="birth">
+                <input type="datetime" name="birth" value="${spouse.birth}">
             </td>
         </tr>
 
@@ -127,26 +132,27 @@
                 评分:
             </td>
             <td>
-                <input type="number" name="score">
+                <input type="number" name="score" value="${spouse.score}">
             </td>
         </tr>
-
-        <tr class="imgs-desc">
+        <tr class="imgs-desc" style="visibility:hidden">
             <td>
                 图片:
             </td>
             <td>
-               <input name="userimage" id="userimage" type="file">&nbsp;
+                <input name="userimage" id="userimage" type="file">&nbsp;
                 <input type="button" id="imgupload" value="上传">
             </td>
         </tr>
 
-        <tr class="imgs-desc">
+        <tr class="imgs-desc" style="visibility:hidden">
             <td>
                 描述:
             </td>
             <td>
-                <textarea name="userdesc" id="userdesc" rows="10" cols="50"></textarea>
+                <textarea name="userdesc" id="userdesc" rows="10" cols="50">
+                    ${spouseImage.userdesc}
+                </textarea>
             </td>
         </tr>
     </table>
@@ -163,12 +169,20 @@
     </thead>
 
     <tbody id="imgdesc">
-       <!-- <tr data-imgid="123456">
+    <c:if test="${spouseImage != null}">
+       <tr data-imgid="${spouseImage.id}">
             <td align="center">1</td>
-            <td align="center"><a href="http://192.168.2.129/spouse/banjing.jpeg" class="imgdetail">坂井泉水</a></td>
-            <td width="100px"><img src="http://192.168.2.129/spouse/banjing.jpeg" width="100px" height="100px"></td>
+            <td align="center"><a href="${spouseImage.imgurl}" class="imgdetail">${spouseImage.userdesc}</a></td>
+            <td width="100px"><img src="${spouseImage.imgurl}" width="200px" height="300px"></td>
             <td align="center"><a href="javascript:void(0)" onclick="deleteimg(this)">删除</a></td>
-        </tr> -->
+        </tr>
+    </c:if>
+
+    <c:if test="${spouseImage == null}">
+        <tr>
+            <td colspan="4">没有图片信息</td>
+        </tr>
+    </c:if>
     </tbody>
 
 </table>

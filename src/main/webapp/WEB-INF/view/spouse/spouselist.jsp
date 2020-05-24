@@ -4,13 +4,28 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
     <title>spouse list</title>
     <base href="<%=basePath%>">
+    <script language="javascript" src="${ctx}/js/jquery-3.3.1.min.js"></script>
+    <script type="application/javascript">
+        $(function($) {
+            $('.update-spouse').click(function (event) {
+                var trimg = $(event.target).parent().parent();
+                var id = trimg.find('td').eq(0).text();
+                location.href='spouse/toUpdateView?id='.concat(id);
+            });
+            
+            
+        });
+    </script>
 </head>
 <body>
-    <h4 align="center"><a href="spouse/add">新增</a></h4>
+    <div style="float: right">
+        <a href="spouse/add">新增</a>
+    </div>
     <table align="center" width="600" border="1" >
         <thead>
         <tr>
@@ -37,8 +52,8 @@
                     <td align="center">${spouse.birth}</td>
                     <td align="center">${spouse.score}</td>
                     <td align="center">
-                        <a href="#" id="update">修改</a>&nbsp;
-                        <a href="#" id="delete">删除</a>
+                        <a href="javascript:void(0);" class="update-spouse">修改</a>&nbsp;
+                        <a href="javascript:void(0);" class="delete-spouse">删除</a>
                     </td>
                 </tr>
             </c:forEach>

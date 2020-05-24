@@ -1,6 +1,7 @@
 package com.sxt.dao.impl;
 
 import com.sxt.bean.Spouse;
+import com.sxt.bean.SpouseImage;
 import com.sxt.dao.SpouseDao;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,38 @@ public class SpouseDaoImpl implements SpouseDao {
         
         query.add(spouse);
         return query;
+    }
+
+    @Override
+    public Integer addSpouseImage(SpouseImage image) {
+        String sql = "INSERT INTO spouseimage(id,imgurl,userdesc) VALUES(?,?,?)";
+        if(image !=null ){
+            return jdbcTemplate.update(sql,new Object[]{image.getId(),image.getImgurl(),image.getUserdesc()});
+        }
+
+        return 0;
+    }
+
+    @Override
+    public Integer addSpouseDo(Spouse sp) {
+        if(sp != null){
+            String sql = "INSERT INTO SPOUSE(NAME,SEX,BIRTH,SCORE,IMGS)VALUES(?,?,?,?,?)";
+            return jdbcTemplate.update(sql,new Object[]{sp.getName(),sp.getSex(),sp.getBirth(),sp.getScore(),sp.getImgs()});
+        }
+        return 0;
+    }
+
+    @Override
+    public SpouseImage fidImageById(String id) {
+        String sql = "SELECT * FROM spouseimage WHERE id = ?";
+        SpouseImage spouseImage = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<SpouseImage>(SpouseImage.class),id);
+        return spouseImage;
+    }
+
+    @Override
+    public Spouse findSpouseById(String id) {
+        String sql = "SELECT * FROM spouse WHERE id = ?";
+        Spouse spouse = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Spouse>(Spouse.class),id);
+        return spouse;
     }
 }
