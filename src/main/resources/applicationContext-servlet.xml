@@ -47,4 +47,15 @@
         <!--允许上传的文件最大大小  单位是byte-->
         <property name="maxUploadSize" value="60000000"/>
     </bean>
+
+    <!--配置拦截器, 多个拦截器,顺序执行 -->
+    <mvc:interceptors>
+        <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
+        <mvc:interceptor>
+            <mvc:mapping path="/spouse/**"/>
+            <mvc:exclude-mapping path="/spouse/list"/>
+            <bean class="com.sxt.interceptor.CustomHandlerInterceptor"/>
+        </mvc:interceptor>
+        <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
+    </mvc:interceptors>
 </beans>

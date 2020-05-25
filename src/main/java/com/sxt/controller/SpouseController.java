@@ -78,4 +78,11 @@ public class SpouseController {
 
         return "spouse/spouseupdate";
     }
+
+    @RequestMapping("updatespousedo")
+    public String updatespousedo(Spouse sp){
+        spouseService.updateSpouseDo(sp);
+        return "redirect:/spouse/list";
+    }
+
 }

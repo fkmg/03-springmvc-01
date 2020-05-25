@@ -65,4 +65,9 @@ public class SpouseServiceImpl implements SpouseService {
     public Spouse findSpouseById(String id) {
         return spouseDao.findSpouseById(id);
     }
+
+    @Override
+    public Integer updateSpouseDo(Spouse sp) {
+        return spouseDao.updateSpouseDo(sp);
+    }
 }

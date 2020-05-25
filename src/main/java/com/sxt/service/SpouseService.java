@@ -45,4 +45,11 @@ public interface SpouseService {
      * @return
      */
     Spouse findSpouseById(String id);
+
+    /**
+     * 修改spouse信息
+     * @param sp
+     * @return
+     */
+    Integer updateSpouseDo(Spouse sp);
 }

@@ -75,4 +75,10 @@ public class SpouseDaoImpl implements SpouseDao {
         Spouse spouse = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Spouse>(Spouse.class),id);
         return spouse;
     }
+
+    @Override
+    public Integer updateSpouseDo(Spouse sp) {
+        String sql = "UPDATE SPOUSE SET NAME=?,SEX=?,BIRTH=?,SCORE=?,IMGS=? WHERE ID =?";
+        return jdbcTemplate.update(sql,new Object[]{sp.getName(),sp.getSex(),sp.getBirth(),sp.getScore(),sp.getImgs(),sp.getId()});
+    }
 }

@@ -107,11 +107,11 @@
                 性别:
             </td>
             <td>
-                <input type="radio" name="sex" value="1"
+                <input type="radio" name="sex" value="0"
                 <c:if test="${spouse.sex == 0}">checked</c:if>
                 >Male
                 <br>
-                <input type="radio" name="sex" value="0"
+                <input type="radio" name="sex" value="1"
                 <c:if test="${spouse.sex == 1}">checked</c:if>
                 >Female
             </td>

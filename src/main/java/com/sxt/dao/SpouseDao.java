@@ -40,4 +40,11 @@ public interface SpouseDao {
      * @return
      */
     Spouse findSpouseById(String id);
+
+    /**
+     * 修改spouse 信息
+     * @param sp
+     * @return
+     */
+    Integer updateSpouseDo(Spouse sp);
 }
