@@ -1,8 +1,12 @@
 package com.sxt.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Spouse {
+public class Spouse implements Serializable {
 
     /**id**/
     private Integer id;
@@ -14,9 +18,11 @@ public class Spouse {
     private Integer sex;
 
     /**出生日期**/
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date birth;
 
     /**评分**/
+    @NumberFormat(pattern = "^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$")
     private Double score;
 
     /**照片**/
