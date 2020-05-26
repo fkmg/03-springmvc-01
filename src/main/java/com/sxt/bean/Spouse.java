@@ -1,8 +1,10 @@
 package com.sxt.bean;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ public class Spouse implements Serializable {
     private Integer id;
 
     /**姓名**/
+    @Size(min=1,max=30,message="{name.length.error}")
     private String name;
 
     /**性别**/
@@ -29,6 +32,7 @@ public class Spouse implements Serializable {
     private String imgs;
 
     /**图片描述**/
+    @NotEmpty(message="{userdesc.isnull.error}")
     private String userdesc;
 
     public String getUserdesc() {

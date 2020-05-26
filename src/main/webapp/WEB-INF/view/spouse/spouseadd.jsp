@@ -86,6 +86,9 @@
 
 </head>
 <body>
+<c:forEach items="${errors}" var="err">
+    ${err.defaultMessage }
+</c:forEach>
 <form action="spouse/addspousedo" method="post" enctype="multipart/form-data">
     <div style="float: right">
         <input type="submit" value="提交">

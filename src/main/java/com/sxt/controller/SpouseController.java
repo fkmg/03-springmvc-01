@@ -8,6 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,7 +65,17 @@ public class SpouseController {
     }
 
     @RequestMapping("addspousedo")
-    public String addspousedo(Spouse sp){
+    public String addspousedo(@Validated Spouse sp, BindingResult result,Model model){
+        if (result.hasErrors()) {
+            List<ObjectError> errors = result.getAllErrors();
+            for(ObjectError objectError:errors){
+                System.out.println(objectError.getCode());
+                System.out.println(objectError.getDefaultMessage());
+                model.addAttribute("errors", errors);
+            }
+            return "spouse/spouseadd";
+        }
+
         spouseService.addSpouseDo(sp);
         return "redirect:/spouse/list";
     }
