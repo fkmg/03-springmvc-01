@@ -71,6 +71,7 @@ public class SpouseDaoImpl implements SpouseDao {
 
     @Override
     public Spouse findSpouseById(String id) {
+
         String sql = "SELECT * FROM spouse WHERE id = ?";
         Spouse spouse = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Spouse>(Spouse.class),id);
         return spouse;
