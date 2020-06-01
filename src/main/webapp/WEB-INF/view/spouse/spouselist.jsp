@@ -25,6 +25,8 @@
 <body>
     <div style="float: right">
         <a href="spouse/add">新增</a>
+        &nbsp;
+        <a href="spouse/ztreetest">树</a>
     </div>
     <table align="center" width="600" border="1" >
         <thead>

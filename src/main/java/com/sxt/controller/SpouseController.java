@@ -98,4 +98,9 @@ public class SpouseController {
         return "redirect:/spouse/list";
     }
 
+    @RequestMapping("ztreetest")
+    public String toztreetestview(){
+        return "spouse/ztreetest";
+    }
+
 }
