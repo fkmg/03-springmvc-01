@@ -2,7 +2,9 @@ package com.sxt.controller;
 
 import com.sxt.bean.Spouse;
 import com.sxt.bean.SpouseImage;
+import com.sxt.bean.TArea;
 import com.sxt.service.SpouseService;
+import com.sxt.service.TAreaService;
 import com.sxt.utils.IDUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class SpouseController {
     
     @Autowired
     private SpouseService spouseService;
+
+    @Autowired
+    private TAreaService tAreaService;
 
     @RequestMapping("list")
     public String spouseList(Model model){
@@ -100,7 +105,20 @@ public class SpouseController {
 
     @RequestMapping("ztreetest")
     public String toztreetestview(){
-        return "spouse/ztreetest";
+        return "spouse/area";
+    }
+
+
+    @RequestMapping("areatree")
+    @ResponseBody
+    public List<TArea> toareaTreetview(Model model,String id){
+        if(StringUtils.isBlank(id)){
+            id = "";
+        }
+        List<TArea> tAreas = tAreaService.listTAreaByParentIdAndStatus(id, 1);
+        //model.addAttribute("tAreas",tAreas);
+        //return "spouse/area";
+        return tAreas;
     }
 
 }
