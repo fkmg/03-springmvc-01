@@ -2,8 +2,6 @@ package com.sxt.bean;
 
 public class TArea {
 
-    /**id**/
-    private Integer id;
 
     /**地区编号**/
     private String areaId;
@@ -16,6 +14,25 @@ public class TArea {
 
     /**状态 1:启用 0:不启用**/
     private Integer status;
+
+    /**是否为父节点**/
+    private Boolean isParent;
+
+    public Boolean getIsParent() {
+        return isParent;
+    }
+
+    public void setIsParent(Boolean isParent) {
+        isParent = isParent;
+    }
+
+    public String getPid() {
+        return parentAreaId;
+    }
+
+    public void setPid(String pid) {
+        this.parentAreaId = pid;
+    }
 
     public String getId() {
         return areaId;
@@ -68,7 +85,6 @@ public class TArea {
     @Override
     public String toString() {
         return "TArea{" +
-                "id=" + id +
                 ", areaId='" + areaId + '\'' +
                 ", parentAreaId='" + parentAreaId + '\'' +
                 ", areaOrCompany='" + areaOrCompany + '\'' +
