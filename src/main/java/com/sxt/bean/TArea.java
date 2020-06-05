@@ -16,14 +16,14 @@ public class TArea {
     private Integer status;
 
     /**是否为父节点**/
-    private Boolean isParent;
+    private boolean isParent;
 
-    public Boolean getIsParent() {
+    public boolean getIsParent() {
         return isParent;
     }
 
-    public void setIsParent(Boolean isParent) {
-        isParent = isParent;
+    public void setIsParent(boolean isParent) {
+        this.isParent = isParent;
     }
 
     public String getPid() {
