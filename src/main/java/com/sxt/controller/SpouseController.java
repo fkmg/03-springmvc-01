@@ -1,5 +1,6 @@
 package com.sxt.controller;
 
+import com.sxt.annotion.LoginAnnontion;
 import com.sxt.bean.Spouse;
 import com.sxt.bean.SpouseImage;
 import com.sxt.bean.TArea;
@@ -34,6 +35,7 @@ public class SpouseController {
     private TAreaService tAreaService;
 
     @RequestMapping("list")
+    @LoginAnnontion
     public String spouseList(Model model){
         System.out.println("hello world");
         List<Spouse> list = spouseService.listSpouse();
