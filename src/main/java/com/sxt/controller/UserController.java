@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @RequestMapping("/land")
-    public String toLand(@Validated User user, BindingResult result, HttpServletRequest request, Model model){
+    public String toLand(@Validated User user, BindingResult result, HttpServletRequest request, HttpServletResponse response, Model model){
         boolean flag = false;
         if (result.hasErrors()) {
             List<ObjectError> errors = result.getAllErrors();
@@ -38,7 +39,7 @@ public class UserController {
             }
         }else {
             try {
-                flag = userService.landUser(user,request);
+                flag = userService.landUser(user,request,response);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

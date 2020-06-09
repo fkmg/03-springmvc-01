@@ -3,6 +3,7 @@ package com.sxt.service;
 import com.sxt.bean.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 /**
@@ -35,7 +36,8 @@ public interface UserService {
      * 登录用户
      * @param user
      * @param request
+     * @param response
      * @return
      */
-    boolean landUser(User user, HttpServletRequest request) throws SQLException;
+    boolean landUser(User user, HttpServletRequest request, HttpServletResponse response) throws SQLException;
 }

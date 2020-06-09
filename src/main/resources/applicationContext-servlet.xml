@@ -70,7 +70,7 @@
         <!-- 资源文件名-->
         <property name="basenames">
             <list>
-                <value>classpath:CustomValidationMessages</value>
+                <value>classpath:CustomValidationMessage</value>
             </list>
         </property>
         <!-- 资源文件编码格式 -->

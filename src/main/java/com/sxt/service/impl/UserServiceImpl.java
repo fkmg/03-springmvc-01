@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 /**
@@ -44,17 +46,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean landUser(User user, HttpServletRequest request) throws SQLException {
+    public boolean landUser(User user, HttpServletRequest request, HttpServletResponse response) throws SQLException {
         boolean flag = false;
         //根据用户名从数据库中查询用户
-        User finduser = userDao.findUserByUserName(user.getUsername());
+        //User finduser = userDao.findUserByUserName(user.getUsername());
         //判断是否登录成功
 
         //获取用户的请求ip
-        String addr = request.getRemoteAddr();
-        int port = request.getRemotePort();
-        if(finduser.getPassword().equals(user.getPassword())){
-            jedisClient.hset("loginuser",addr, JsonUtils.objectToJson(user));
+        //String addr = request.getRemoteAddr();
+        //int port = request.getRemotePort();finduser.getPassword().equals(user.getPassword())
+        if(true){
+            //jedisClient.set("loginuser", JsonUtils.objectToJson(user));
+            //设置登录的有效时间
+            //jedisClient.expire(user.getUsername(),30*60);
+            //将用户名存放到用户的cookie中
+            Cookie cookie = new Cookie("loginuser", JsonUtils.objectToJson(user));
+            cookie.setPath("/myspringMVC3/");
+            cookie.setMaxAge(60);
+            response.addCookie(cookie);
             flag = true;
         }
         return flag;

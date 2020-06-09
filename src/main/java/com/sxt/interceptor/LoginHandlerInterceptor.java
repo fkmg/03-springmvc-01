@@ -13,6 +13,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -85,12 +86,31 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         String addr = request.getRemoteAddr();
         int port = request.getRemotePort();
         //判断用户是否登录
-        String loginuser = jedisClient.hget("loginuser", addr);
-        if(StringUtils.isNotBlank(loginuser)){
-            User user = JsonUtils.jsonToPojo(loginuser, User.class);
-            log.debug("["+DateFormatUtils.format(now,"yyyy/MM/dd HH:mm:ss")+"]"+user.getUsername()+"访问了"+method.getName());
-            return true;
+
+        //获取cookie信息
+        Cookie cookie = null;
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null && cookies.length>0){
+            for(int i=0; i< cookies.length;i++){
+               if("loginuser".equals(cookies[i].getName())) {
+                   cookie = cookies[i];
+                   break;
+               }
+            }
         }
+        if(cookie !=null){
+            User users = JsonUtils.jsonToPojo(cookie.getValue(), User.class);
+            if(users != null){
+                //String loginuser = jedisClient.get(users.getUsername());
+                String loginuser = null;
+                if(StringUtils.isNotBlank(loginuser)){
+                    User user = JsonUtils.jsonToPojo(loginuser, User.class);
+                    log.debug("["+DateFormatUtils.format(now,"yyyy/MM/dd HH:mm:ss")+"]"+user.getUsername()+"访问了"+method.getName());
+                    return true;
+                }
+            }
+        }
+
 
         //重定向让用户去登陆
         log.debug("["+DateFormatUtils.format(now,"yyyy/MM/dd HH:mm:ss")+"]"+addr+"/"+port+"访问了"+method.getName());
