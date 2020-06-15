@@ -14,7 +14,7 @@ public class TestJedis {
     @Test
     public void testJedisSingle(){
 
-        Jedis jedis = new Jedis("192.168.2.129", 6379);
+        Jedis jedis = new Jedis("192.168.1.129", 6379);
         Set<String> keys = jedis.keys("s*");
         if(keys != null){
             for (String key :keys){
@@ -37,7 +37,7 @@ public class TestJedis {
     @Test
     public void testJedisSingleByPool() {
 
-        JedisPool pool = new JedisPool("192.168.2.129", 6379);
+        JedisPool pool = new JedisPool("192.168.1.129", 6379);
         Jedis jedis = null;
 
         try  {

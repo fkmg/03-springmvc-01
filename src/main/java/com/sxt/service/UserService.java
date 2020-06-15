@@ -4,6 +4,7 @@ import com.sxt.bean.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 
 /**
@@ -39,5 +40,5 @@ public interface UserService {
      * @param response
      * @return
      */
-    boolean landUser(User user, HttpServletRequest request, HttpServletResponse response) throws SQLException;
+    boolean landUser(User user, HttpServletRequest request, HttpServletResponse response) throws SQLException, UnsupportedEncodingException;
 }

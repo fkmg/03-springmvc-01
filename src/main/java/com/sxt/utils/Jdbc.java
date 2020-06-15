@@ -9,7 +9,7 @@ public class Jdbc {
 
     private static String userName="root";
     private static String passWord ="123456";
-    private static String url = "jdbc:mysql://localhost:3307/test";
+    private static String url = "jdbc:mysql://192.168.1.130:3306/test";
 
     /*@Value("${username}")
     private static String userName;

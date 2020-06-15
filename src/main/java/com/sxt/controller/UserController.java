@@ -1,6 +1,8 @@
 package com.sxt.controller;
 
+import com.sxt.bean.Spouse;
 import com.sxt.bean.User;
+import com.sxt.service.SpouseService;
 import com.sxt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,6 +24,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SpouseService spouseService;
 
     @RequestMapping("/toLoginView")
     public String toLoginView(){
@@ -40,14 +46,17 @@ public class UserController {
         }else {
             try {
                 flag = userService.landUser(user,request,response);
-            } catch (SQLException e) {
+            } catch (SQLException | UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         }
         if(flag){
-            return "forward:/spouse/list";
+            //登录成功
+            List<Spouse> list = spouseService.listSpouse();
+            model.addAttribute("spouselist",list);
+            return "spouse/spouselist";
         }
-        return "redirect:/myspringMVC3/user/toLoginView";
+        return "redirect:/user/toLoginView";
 
     }
 }

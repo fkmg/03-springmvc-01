@@ -19,7 +19,7 @@
     </script>
 </head>
 <body>
-    <form action="/myspringMVC3/user/land" method="post">
+    <form action="/springmvc/user/land" method="post">
         <table>
             <tr>
                 <td>用户名</td>

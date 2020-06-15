@@ -31,7 +31,7 @@ public class SpouseServiceImpl implements SpouseService {
     @Override
     public Map<String, Object> uploadFile(String userdesc, String genImageName, InputStream in) {
         Map<String,Object> resultMap = new HashMap<>();
-        boolean result = FtpUtil.uploadFile("192.168.2.129", 21, "ftpuser", "123456", "/home/ftp/", "/spouse", genImageName, in);
+        boolean result = FtpUtil.uploadFile("192.168.1.129", 21, "ftpuser", "123456", "/home/ftp/", "/spouse", genImageName, in);
         if (result){
             //上传成功
             //将信息保存到数据库中

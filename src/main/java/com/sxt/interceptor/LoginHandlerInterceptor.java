@@ -6,6 +6,7 @@ import com.sxt.jedis.JedisClient;
 import com.sxt.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.net.util.Base64;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -101,10 +102,12 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         if(cookie !=null){
             User users = JsonUtils.jsonToPojo(cookie.getValue(), User.class);
             if(users != null){
-                //String loginuser = jedisClient.get(users.getUsername());
-                String loginuser = null;
+                String loginuser = jedisClient.get(users.getUsername());
+                //String loginuser = null;
                 if(StringUtils.isNotBlank(loginuser)){
-                    User user = JsonUtils.jsonToPojo(loginuser, User.class);
+                    byte[] bytes = Base64.decodeBase64(loginuser.getBytes());
+                    String str = new String(bytes, "utf-8");
+                    User user = JsonUtils.jsonToPojo(str, User.class);
                     log.debug("["+DateFormatUtils.format(now,"yyyy/MM/dd HH:mm:ss")+"]"+user.getUsername()+"访问了"+method.getName());
                     return true;
                 }
@@ -114,7 +117,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 
         //重定向让用户去登陆
         log.debug("["+DateFormatUtils.format(now,"yyyy/MM/dd HH:mm:ss")+"]"+addr+"/"+port+"访问了"+method.getName());
-        response.sendRedirect("/myspringMVC3/user/toLoginView");
+        response.sendRedirect("/springmvc/user/toLoginView");
         return false;
     }
 }

@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findUserByUserName(String username) throws SQLException {
-        String sql = "SELECT * FROM USER WHERE username = ?";
+        String sql = "SELECT * FROM user WHERE username = ?";
         ResultSet rst = Jdbc.search(sql, username);
         BeanHandler<User> beanHandler = new BeanHandler<User>(User.class);
         User user = beanHandler.handle(rst);
